@@ -14,6 +14,8 @@ enum class ErrorCode(
     UNSUPPORTED_TOKEN("잘못된 토큰입니다.", HttpStatus.FORBIDDEN),
     INVALID_UUID("잘못된 UUID입니다.", HttpStatus.BAD_REQUEST),
 
+    BLANK_CONTENT("제목과 내용은 비워둘 수 없습니다.", HttpStatus.BAD_REQUEST),
+
     PAGE_NOT_FOUND("없는 페이지입니다.", HttpStatus.NOT_FOUND),
     PAGE_FORBIDDEN("접근 권한이 없는 페이지입니다.", HttpStatus.NOT_FOUND),
     FILE_NOT_FOUND("파일을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
