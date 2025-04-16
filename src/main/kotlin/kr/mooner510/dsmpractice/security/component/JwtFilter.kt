@@ -20,6 +20,7 @@ class JwtFilter(
         response: HttpServletResponse,
         filterChain: FilterChain,
     ) {
+        filterChain.doFilter(request, response)
     }
 
     private fun getToken(request: HttpServletRequest): String? {

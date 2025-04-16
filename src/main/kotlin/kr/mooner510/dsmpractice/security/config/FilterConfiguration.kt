@@ -17,6 +17,7 @@ class FilterConfiguration(
 ) : SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>() {
 
     override fun configure(builder: HttpSecurity) {
+
         val jwtFilter = JwtFilter(tokenProvider)
         val exceptionFilter = ExceptionFilter(objectMapper)
         builder.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)

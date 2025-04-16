@@ -38,15 +38,17 @@ class SecurityConfig(
             .cors { }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
-                it.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-
                 it.requestMatchers(HttpMethod.GET, "/v1/**").permitAll()
-
                 it.requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/sign-up").permitAll()
+                it.requestMatchers(HttpMethod.POST, "/api/post/create").permitAll()
+                it.requestMatchers(HttpMethod.GET, "/api/post/read").permitAll()
+                it.requestMatchers(HttpMethod.PUT, "/api/post/update/**").permitAll()
+                it.requestMatchers(HttpMethod.DELETE, "/api/post/delete/1").permitAll()
 
                 it.anyRequest().denyAll()
             }
             .with(FilterConfiguration(tokenProvider, objectMapper), Customizer.withDefaults())
+
             .build()
     }
 }
