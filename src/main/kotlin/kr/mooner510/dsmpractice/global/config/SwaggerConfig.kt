@@ -29,4 +29,11 @@ class SwaggerConfig {
             .pathsToMatch("/api/auth/**")
             .build()
     }
+    @Bean
+    fun user(): GroupedOpenApi {
+        return GroupedOpenApi.builder()
+            .group("게시물")
+            .pathsToMatch("/api/post/**")
+            .build()
+    }
 }

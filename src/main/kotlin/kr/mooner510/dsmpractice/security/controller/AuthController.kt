@@ -3,6 +3,7 @@ package kr.mooner510.dsmpractice.security.controller
 import kr.mooner510.dsmpractice.security.data.request.LoginRequest
 import kr.mooner510.dsmpractice.security.data.response.TokenResponse
 import kr.mooner510.dsmpractice.security.service.AuthService
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,5 +20,9 @@ class AuthController(private val authService: AuthService) {
     @PostMapping("/sign-up")
     fun signUp(@RequestBody req: LoginRequest) {
         authService.signUp(req)
+    }
+    @PostMapping("/withdraw")
+    fun withdraw(@PathVariable id: Long, @RequestBody req: LoginRequest) {
+        authService.withdrawMember(id, req)
     }
 }

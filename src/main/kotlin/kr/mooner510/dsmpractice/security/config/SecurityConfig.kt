@@ -38,12 +38,18 @@ class SecurityConfig(
             .cors { }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
-                it.requestMatchers(HttpMethod.GET, "/v1/**").permitAll()
-                it.requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/sign-up").permitAll()
+
+                it.requestMatchers(HttpMethod.GET,"/v1/**").permitAll()
+
+                // 로그인 회원가입
+                it.requestMatchers(HttpMethod.POST, "/api/auth/sign-up").permitAll()
+                it.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                it.requestMatchers(HttpMethod.POST, "/api/auth/withdraw").permitAll()
+                // 게시물 CRUD
                 it.requestMatchers(HttpMethod.POST, "/api/post/create").permitAll()
                 it.requestMatchers(HttpMethod.GET, "/api/post/read").permitAll()
                 it.requestMatchers(HttpMethod.PUT, "/api/post/update/**").permitAll()
-                it.requestMatchers(HttpMethod.DELETE, "/api/post/delete/1").permitAll()
+                it.requestMatchers(HttpMethod.DELETE, "/api/post/delete/**").permitAll()
 
                 it.anyRequest().denyAll()
             }

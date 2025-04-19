@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @RestController
 @RequestMapping("/api/post")
@@ -24,6 +25,11 @@ class PostController(private val postService: PostService) {
     @GetMapping("/read")
     fun readAllPost(): List<Post> {
         return postService.getAllPosts()
+    }
+
+    @GetMapping("/read/{id}")
+    fun readOnePost(@PathVariable id: Long): Optional<Post> {
+        return postService.getOnePost(id)
     }
 
     @PutMapping("/update/{id}")

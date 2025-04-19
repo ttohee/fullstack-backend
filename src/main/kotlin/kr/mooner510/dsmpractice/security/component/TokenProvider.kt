@@ -31,12 +31,13 @@ class TokenProvider(
 
         val now = Instant.now()
 
-        return Jwts.builder()
-            .id(user.id.toString())
-            .subject("acc")
-            .claim("name", user.name)
-            .issuedAt(Date.from(now))
-            .expiration(Date.from(now.plusSeconds(accessTime)))
+        return Jwts.builder() // jwt토큰 생성
+            .id(user.id.toString()) // 유저 아이디
+            .subject("acc") // 토큰 사용 용도 (액세스)
+            .claim("name", user.name) // 유저이름
+            .issuedAt(Date.from(now)) // 토큰 발급일
+            .expiration(Date.from(now.plusSeconds(accessTime))) // 토큰 만료일
+            .signWith(key) // 암호화할 키
             .compact()
     }
 

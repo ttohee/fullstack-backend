@@ -8,6 +8,7 @@ import kr.mooner510.dsmpractice.global.error.ErrorCode
 import kr.mooner510.dsmpractice.global.error.data.GlobalError
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
+import java.util.*
 
 @Service
 class PostService(
@@ -23,6 +24,10 @@ class PostService(
 
     fun getAllPosts(): List<Post> {
         return postRepository.findAll()
+    }
+
+    fun getOnePost(id: Long): Optional<Post> {
+        return postRepository.findById(id)
     }
 
     @Transactional

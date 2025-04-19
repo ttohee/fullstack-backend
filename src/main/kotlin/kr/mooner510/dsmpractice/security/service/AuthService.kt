@@ -9,7 +9,6 @@ import kr.mooner510.dsmpractice.security.data.response.TokenResponse
 import kr.mooner510.dsmpractice.security.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
 @Service
@@ -34,8 +33,21 @@ class AuthService(
         if (userRepository.existsByName(req.id)) {
             throw GlobalError(ErrorCode.USER_ALREADY_EXISTS)
         }
+        if (req.id.length > 31){
+            throw GlobalError(ErrorCode.USER_NAME_TOO_LONG)
+        }
 
         userRepository.save(User(0, req.id, passwordEncoder.encode(req.password)))
+    }
+
+    fun withdrawMember(id: Long, req: LoginRequest){
+        val user = userRepository.findById(id).getOrNull() ?: throw GlobalError(ErrorCode.USER_NOT_FOUND)
+
+        if (passwordEncoder.matches(req.password, user.password)) {
+            userRepository.deleteById(id)
+            return
+        }
+        throw GlobalError(ErrorCode.WITHDRAW_FAILED)
     }
 
 //    fun reissue(req: ReissueRequest): TokenResponseAccessOnly {
