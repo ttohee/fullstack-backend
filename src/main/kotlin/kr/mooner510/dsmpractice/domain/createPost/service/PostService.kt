@@ -31,13 +31,13 @@ class PostService(
     }
 
     @Transactional
-    fun updatePost(id: Long, request: PostRequest): List<Post> {
+    fun updatePost(id: Long, request: PostRequest): Optional<Post> {
         val post = postRepository.findById(id).get()
         post.title = request.title
         post.content = request.content
         post.date = LocalDateTime.now()
 
-        return postRepository.findAll()
+        return postRepository.findById(id)
     }
 
     fun deletePost(id: Long): List<Post> {

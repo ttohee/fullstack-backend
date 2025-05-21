@@ -21,7 +21,7 @@ class AuthController(private val authService: AuthService) {
     fun signUp(@RequestBody req: LoginRequest) {
         authService.signUp(req)
     }
-    @PostMapping("/withdraw")
+    @PostMapping("/withdraw/{id}")
     fun withdraw(@PathVariable id: Long, @RequestBody req: LoginRequest) {
         authService.withdrawMember(id, req)
     }

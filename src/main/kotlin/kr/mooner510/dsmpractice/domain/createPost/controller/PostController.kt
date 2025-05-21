@@ -33,7 +33,7 @@ class PostController(private val postService: PostService) {
     }
 
     @PutMapping("/update/{id}")
-    fun updatePost(@PathVariable id: Long, @RequestBody req: PostRequest): List<Post> {
+    fun updatePost(@PathVariable id: Long, @RequestBody req: PostRequest): Optional<Post> {
         return postService.updatePost(id, req)
     }
 

@@ -15,7 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
-import org.springframework.web.cors.CorsUtils
 
 @Configuration
 @EnableWebSecurity
@@ -41,13 +40,14 @@ class SecurityConfig(
 
                 it.requestMatchers(HttpMethod.GET,"/v1/**").permitAll()
 
-                // 로그인 회원가입
-                it.requestMatchers(HttpMethod.POST, "/api/auth/sign-up").permitAll()
+                // 로그인 회원가입 회원탈퇴
                 it.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                it.requestMatchers(HttpMethod.POST, "/api/auth/withdraw").permitAll()
+                it.requestMatchers(HttpMethod.POST, "/api/auth/sign-up").permitAll()
+                it.requestMatchers(HttpMethod.POST, "/api/auth/withdraw/**").permitAll()
                 // 게시물 CRUD
                 it.requestMatchers(HttpMethod.POST, "/api/post/create").permitAll()
                 it.requestMatchers(HttpMethod.GET, "/api/post/read").permitAll()
+                it.requestMatchers(HttpMethod.GET, "/api/post/read/**").permitAll()
                 it.requestMatchers(HttpMethod.PUT, "/api/post/update/**").permitAll()
                 it.requestMatchers(HttpMethod.DELETE, "/api/post/delete/**").permitAll()
 
